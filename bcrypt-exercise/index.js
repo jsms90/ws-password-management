@@ -2,14 +2,24 @@
 
 const bcrypt = require('bcryptjs');
 
-const hashPassword = (password) => {
-  // use bcrypt to hash the password and return it asynchronously
-  return Promise.resolve('hashed password?');
+const hashPassword = (password, callback) => {
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) callback(err);
+    else {
+      bcrypt.hash(password, salt, (err, hash) => {
+        callback(null, hash);
+      });
+    }
+  });
 };
 
-const comparePasswords = (password, hashedPassword) => {
-  // use bcrypt to compare the passwords and return a boolean asynchronously
-  return Promise.resolve('oops');
+const comparePasswords = (password, hashedPassword, callback) => {
+  bcrypt.compare(password, hashedPassword, (err, res) => {
+    if (err) callback(err);
+    else {
+      callback(null, res);
+    }
+  })
 };
 
 module.exports = {
