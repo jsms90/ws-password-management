@@ -20,7 +20,7 @@ test('passwords are being validated correctly - pass', () =>
 
 test('passwords are being validated correctly - pass', () =>
   hashPassword('pa$$w0rd', (err, hashedPw) => {
-    comparePasswords('pa$$w0rd', hashedPw, (err, correct) => {
+    comparePasswords('WRONG', hashedPw, (err, correct) => {
       expect(correct).toBe(false)
     })
   })
